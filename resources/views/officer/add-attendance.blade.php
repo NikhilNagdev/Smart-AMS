@@ -41,8 +41,28 @@
             <div class="page-inner">
                 <div class="page-header">
                     <h4 class="page-title">Add Attendance</h4>
-                </div>
 
+                    <ul class="breadcrumbs">
+                        <li class="nav-home">
+                            <a href="#">
+                                <i class="flaticon-home"></i>
+                            </a>
+                        </li>
+                        <li class="separator">
+                            <i class="flaticon-right-arrow"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">Attendance</a>
+                        </li>
+                        <li class="separator">
+                            <i class="flaticon-right-arrow"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">Add Attendance</a>
+                        </li>
+                    </ul>
+
+                </div>
                 <div class="row">
                     <div class="col-md-10">
                         <form>
