@@ -12,9 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('officer.index');
 });
 
 Route::get('/admin', function () {
     return view('admin.index');
+});
+
+Route::get('/add-attendance', function () {
+    return view('officer.add-attendance');
 });
