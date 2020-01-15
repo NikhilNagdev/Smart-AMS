@@ -65,29 +65,36 @@
                 </div>
                 <div class="row">
                     <div class="col-md-10">
-                        <form>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1" class="font-weight-bold">Please Select Your Center</label>
-                                <select name="center" id="" class="form-control">
-                                    <option value="">Center 1</option>
-                                    <option value="">Center 2</option>
-                                    <option value="">Center 3</option>
-                                    <option value="">Center 4</option>
-                                    <option value="">Center 5</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Please Record Your Voice By Clicking Button</label>
-                                <button class="fa fa-microphone form-control"></button>
-                            </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1" class="font-weight-bold">Please Select Your Center</label>
+                                        <select name="center" id="" class="form-control">
+                                            <option value="">Center 1</option>
+                                            <option value="">Center 2</option>
+                                            <option value="">Center 3</option>
+                                            <option value="">Center 4</option>
+                                            <option value="">Center 5</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Please Record Your Voice By Clicking Button</label>
+                                        <button class="fa fa-microphone form-control"></button>
+                                    </div>
 
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Please Add Your Location For Verification</label>
-                                <button class="fa fa-location-arrow form-control"></button>
-                            </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Please Add Your Location For Verification</label>
+                                        <button class="fa fa-location-arrow form-control"></button>
+                                    </div>
 
-                            <button type="submit" class="btn btn-primary form-control">Submit</button>
-                        </form>
+                                    <div class="card-action">
+                                    <button type="submit" class="btn btn-primary form-control">Submit</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
 
