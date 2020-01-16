@@ -78,13 +78,26 @@
                                             <option value="">Center 5</option>
                                         </select>
                                     </div>
+
+                                    <div class="form-group">
+
+                                    </div>
+
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Please Record Your Voice By Clicking Button</label>
-                                        {{--<button class=""></button>--}}
+
                                         <button type="button" class="btn fa fa-microphone form-control" data-toggle="modal" data-target="#exampleModalCenter"></button>
-                                        <br>
+
+
+                                    </div>
+
+                                    <div class="form-group">
                                         <ul id="recordingsList" class="list-unstyled"></ul>
                                     </div>
+
+                                    <div class="form-row align-items-center" id="audio-div">
+                                    </div>
+
 
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Please Add Your Location For Verification</label>
@@ -95,12 +108,6 @@
                                         <button type="submit" class="btn btn-primary form-control">Submit</button>
                                     </div>
 
-                                    <!-- Button trigger modal -->
-                                    {{--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">--}}
-                                        {{--Launch demo modal--}}
-                                    {{--</button>--}}
-
-                                    <!-- Modal -->
                                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
@@ -111,18 +118,15 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+                                                    A woman finds a pot of treasure on the road while she is returning from work.
+                                                    Delighted with her luck, she decides to keep it.
+                                                    As she is taking it home, it keeps changing.
+                                                    However, her enthusiasm refuses to fade away.
                                                 </div>
                                                 <div class="modal-footer" style="text-align:center;">
-                                                    {{--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--}}
-                                                    {{--<button type="button" class="btn btn-danger"><i class="fa fa-microphone-alt"></i>  Record</button>--}}
-                                                    {{--<button type="button" class="btn btn-primary"><i class="fa fa-stop"></i>  Stop</button>--}}
-                                                    {{--<button type="button" class="btn btn-success">Submit Recording</button>--}}
                                                     <button id="recordButton" type="button" class="btn btn-danger "  style="margin:auto;display:block;"> <i class="fa fa-microphone-alt"></i>  Record</button>
                                                     <button id="pauseButton" type="button" class="btn btn-primary" disabled style="margin:auto;display:block;"><i class="fa fa-pause"></i>  Pause</button>
                                                     <button id="stopButton" type="button" class="btn btn-success" disabled style="margin:auto;display:block;"><i class="fa fa-stop"></i>  Stop</button>
-                                                    {{--<div id="formats"></div>--}}
-                                                    {{--<h3>Recordings</h3>--}}
                                                     <br>
                                                     <!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
 
@@ -294,9 +298,6 @@
             var upload = document.createElement('a');
             upload.href="#";
             upload.innerHTML = "";
-            upload.addEventListener("click", function(event){
-
-
                 // xhttp.onreadystatechange = function() {
                 //     if (this.readyState == 4 && this.status == 200) {
                 //         document.getElementById("demo").innerHTML =
@@ -306,35 +307,41 @@
                 // xhttp.open("GET", "ajax_info.txt", true);
                 // xhttp.send();
 
+
+            $("#audio-div").append("<div class=\"col-auto\">\n" +
+                "            <div class=\"custom-circle-loader\">\n" +
+                "            <div class=\"custom-checkmark custom-draw\">\n" +
+                "            </div>\n" +
+                "        </div>\n" +
+                "        </div>\n");
+
                 var xhr=new XMLHttpRequest();
                 xhr.onreadystatechange = function(e) {
-                    alert(this.readyState);
+                    // alert(this.readyState);
                     if(this.readyState === 4) {
-                        alert("Hello");
                         console.log("Server returned: ", xhr.response);
+                        $('.custom-circle-loader').toggleClass('load-complete');
+                        $('.custom-checkmark').toggle();
+                        $("#audio-div").append("<div class=\"col-auto\"><p class=\"\">Audio Verfied Sucessfully</p></div>");
+
                     }
                 };
                 var fd=new FormData();
                 fd.append("audio", blob, filename);
-                fd.append("name", "3");
+                fd.append("name", "175333");
                 fd.append("demo", "rgd fg dfg gd gfdg")		;
 
                 xhr.open("POST", "https://audiomanavdemo.herokuapp.com/uploader", true);
                 // xhr.withCredentials = true;
-                xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-                xhr.setRequestHeader('Access-Control-Allow-Methods', 'POST');
-                xhr.setRequestHeader('Access-Control-Allow-Credentials', true);
-                xhr.setRequestHeader('Access-Control-Max-Age', '86400'); // 24 hours
-                xhr.setRequestHeader('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept')
+                // xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+                // xhr.setRequestHeader('Access-Control-Allow-Methods', 'POST');
+                // xhr.setRequestHeader('Access-Control-Allow-Credentials', true);
+                // xhr.setRequestHeader('Access-Control-Max-Age', '86400'); // 24 hours
+                // xhr.setRequestHeader('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept')
                 // xhr.setRequestHeader("Access-Control-Allow-Credentials", "true");
                 // xhr.open("POST", "upload.php", true);
                 xhr.send(fd);
 
-                xhr.onload = function(data) {
-                    console.log("dlkajsdkasjdlkasjdljasld");
-                    // console.log(data.success);
-                };
-            })
             li.appendChild(document.createTextNode (" "))//add a space in between
             li.appendChild(upload)//add the upload link to li
 
