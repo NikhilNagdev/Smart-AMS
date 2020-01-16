@@ -10,7 +10,7 @@
 	<script src="{{asset('assets/js/plugin/webfont/webfont.min.js')}}"></script>
 	<script>
 WebFont.load({
-			google: {"families":["Open+Sans:300,400,600,700"]},
+			google: {"families":["Poppins:300,400,600,700"]},
 			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands"], urls: ['{{asset('assets/css/fonts.css')}}']},
 			active: function() {
     sessionStorage.fonts = true;
@@ -19,6 +19,7 @@ WebFont.load({
 	</script>
 
 	<!-- CSS Files -->
+	<link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
 	<link rel="stylesheet" href="{{asset('assets/css/azzara.min.css')}}">
 </head>
