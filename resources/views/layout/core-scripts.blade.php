@@ -43,5 +43,5 @@
 <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
 
 <!-- Azzara JS -->
-<script src="{{asset('assets/js/ready.min.js')}}"></script>
+<script src="{{asset('assets/js/ready.js')}}"></script>
 
