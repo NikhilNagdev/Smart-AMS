@@ -40,7 +40,7 @@
 <!-- Sweet Alert -->
 <script src="{{asset('assets/js/plugin/sweetalert/sweetalert.min.js')}}"></script>
 
-<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+<script src={{ asset('assets/js/recorder.js') }}></script>
 
 <!-- Azzara JS -->
 <script src="{{asset('assets/js/ready.min.js')}}"></script>

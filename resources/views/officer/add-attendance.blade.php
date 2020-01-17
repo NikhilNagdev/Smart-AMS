@@ -101,7 +101,7 @@
 
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Please Add Your Location For Verification</label>
-                                        <button class="fa fa-location-arrow form-control"></button>
+                                        <button class="fa fa-location-arrow form-control" id="location-button" onclick="getLocation()"></button>
                                     </div>
 
                                     <div class="card-action">
@@ -206,6 +206,8 @@
                 //update the format
                 // document.getElementById("formats").innerHTML="Format: 1 channel pcm @ "+audioContext.sampleRate/1000+"kHz"
 
+
+
                 /*  assign to gumStream for later use  */
                 gumStream = stream;
 
@@ -216,7 +218,8 @@
                     Create the Recorder object and configure to record mono sound (1 channel)
                     Recording 2 channels  will double the file size
                 */
-                rec = new Recorder(input,{numChannels:1})
+                rec = new Recorder(input,{numChannels:1, sampleRate:50000})
+                // alert(audioContext.sampleRate/1000);
 
                 //start the recording process
                 rec.record()
@@ -348,6 +351,28 @@
             //add the li element to the ol
             recordingsList.appendChild(li);
         }
+
+        // var x = document.getElementById("demo1");
+        // var y = document.getElementById("demo2");
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.watchPosition(showPosition);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        function showPosition(position) {
+            alert("Latitude: " + position.coords.latitude.toFixed(4) + "Longitude: " + position.coords.longitude.toFixed(4))
+            latitude = position.coords.latitude.toFixed(4);
+            longitude =  position.coords.longitude.toFixed(4);
+            $.ajax({url: "",
+                success: function(result) {
+                    $("#h11").html(result);
+            }});
+        }
+
 
     </script>
 @endsection
