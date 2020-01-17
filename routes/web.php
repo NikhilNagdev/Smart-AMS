@@ -19,6 +19,10 @@ Route::get('/admin', function () {
     return view('admin.index');
 });
 
-Route::get('/add-attendance', function () {
+Route::get('/create-attendance', function () {
     return view('officer.add-attendance');
 });
+
+//Route::post('/add-attendance', 'AttendanceController@create')->name('add-attendance');
+
+Route::post('/loc','AjaxController@location');

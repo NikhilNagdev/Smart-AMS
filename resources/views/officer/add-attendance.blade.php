@@ -67,7 +67,9 @@
                     <div class="col-md-10">
                         <div class="card">
                             <div class="card-body">
-                                <form>
+
+                                <form action="xyz.com" id="attendance-form">
+                                    @csrf
                                     <div class="form-group">
                                         <label for="exampleInputPassword1" class="font-weight-bold">Please Select Your Center</label>
                                         <select name="center" id="" class="form-control">
@@ -91,6 +93,9 @@
 
                                     </div>
 
+
+                                    <input type="hidden" id="audio-verification-status" name="audio-verification-status">
+
                                     <div class="form-group">
                                         <ul id="recordingsList" class="list-unstyled"></ul>
                                     </div>
@@ -98,14 +103,15 @@
                                     <div class="form-row align-items-center" id="audio-div">
                                     </div>
 
-
+                                    <input type="hidden" name="lat" id="lat">
+                                    <input type="hidden" name="long" id="long">
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Please Add Your Location For Verification</label>
-                                        <button class="fa fa-location-arrow form-control" id="location-button" onclick="getLocation()"></button>
+                                        <button type="button" class="fa fa-location-arrow form-control" id="location-button" onclick="getLocation()"></button>
                                     </div>
 
                                     <div class="card-action">
-                                        <button type="submit" class="btn btn-primary form-control">Submit</button>
+                                        <button id="submit" class="btn btn-primary form-control" type="submit" onclick="submitCalled()">Submit</button>
                                     </div>
 
                                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -132,8 +138,8 @@
 
                                                 </div>
 
-
                                             </div>
+
                                         </div>
                                     </div>
 
@@ -146,9 +152,25 @@
 
             </div>
         </div>
-
+        <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
     </div>
     <script>
+        function submitCalled() {
+            $("form").submit(function( event ) {
+
+                if($("#audio-verification-status").val === "true" && $('#lat') && $('#long')){
+
+                    // $('#attendance-form').submit();
+                }else{
+                    alert('else');
+                    event.preventDefault();
+                }
+
+            });
+        }
+
+
+
         //webkitURL is deprecated but nevertheless
         URL = window.URL || window.webkitURL;
 
@@ -323,26 +345,30 @@
                     // alert(this.readyState);
                     if(this.readyState === 4) {
                         console.log("Server returned: ", xhr.response);
-                        $('.custom-circle-loader').toggleClass('load-complete');
-                        $('.custom-checkmark').toggle();
-                        $("#audio-div").append("<div class=\"col-auto\"><p class=\"\">Audio Verfied Sucessfully</p></div>");
+                        var response = jQuery.parseJSON(xhr.response);
+                        if(response.output)
+                            if(response.output[0] >= 70.00000000000000){
+                                $('.custom-circle-loader').toggleClass('load-complete');
+                                $('.custom-checkmark').toggle();
+                                $("#audio-div").append("<div class=\"col-auto\"><p class=\"\">Audio Verfied Sucessfully</p></div>");
+                            }else{
+                                $('#audio-div').hide();
+                                $('#recordingsList li').remove();
+                                $('#audio-verification-status').val("true");
+                            }
+                        else{
+                            $('#audio-div').hide();
+                            $('#recordingsList li').remove();
+                        }
 
                     }
                 };
                 var fd=new FormData();
                 fd.append("audio", blob, filename);
                 fd.append("name", "175333");
-                fd.append("demo", "rgd fg dfg gd gfdg")		;
+                fd.append("demo", "A woman finds a pot of treasure on the road while she is returning from work Delighted with her luck, she decides to keep it As she is taking it home it keeps changing However her enthusiasm refuses to fade away")		;
 
-                xhr.open("POST", "https://audiomanavdemo.herokuapp.com/uploader", true);
-                // xhr.withCredentials = true;
-                // xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-                // xhr.setRequestHeader('Access-Control-Allow-Methods', 'POST');
-                // xhr.setRequestHeader('Access-Control-Allow-Credentials', true);
-                // xhr.setRequestHeader('Access-Control-Max-Age', '86400'); // 24 hours
-                // xhr.setRequestHeader('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept')
-                // xhr.setRequestHeader("Access-Control-Allow-Credentials", "true");
-                // xhr.open("POST", "upload.php", true);
+                xhr.open("POST", "http://97312277.ngrok.io/uploader", true);
                 xhr.send(fd);
 
             li.appendChild(document.createTextNode (" "))//add a space in between
@@ -364,13 +390,28 @@
         }
 
         function showPosition(position) {
-            alert("Latitude: " + position.coords.latitude.toFixed(4) + "Longitude: " + position.coords.longitude.toFixed(4))
+            // alert("Latitude: " + position.coords.latitude.toFixed(4) + "Longitude: " + position.coords.longitude.toFixed(4))
+            console.log("Latitude: " + position.coords.latitude.toFixed(4) + "Longitude: " + position.coords.longitude.toFixed(4));
             latitude = position.coords.latitude.toFixed(4);
             longitude =  position.coords.longitude.toFixed(4);
-            $.ajax({url: "",
-                success: function(result) {
-                    $("#h11").html(result);
-            }});
+            $.ajax({
+                type:'POST',
+                url:'/loc',
+                data:{
+                    "_token": $('#token').val(),
+                    'lat':latitude,
+                    'longt':longitude,
+                },
+                success:function(data) {
+                    alert(data.msg);
+                    if(data.msg === "Sucessfull" ){
+                        $('#lat').val(latitude);
+                        $('#long').val(longitude);
+                    }else{
+                        alert("Your location is invalid");
+                    }
+                }
+            });
         }
 
 
