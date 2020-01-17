@@ -19,9 +19,13 @@ Route::get('/admin', function () {
     return view('admin.index');
 });
 
-Route::get('/create-attendance', function () {
+Route::get('/add-attendance', function () {
     return view('officer.add-attendance');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
 
 //Route::post('/add-attendance', 'AttendanceController@create')->name('add-attendance');
 

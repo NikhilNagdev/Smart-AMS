@@ -43,5 +43,5 @@
 <script src={{ asset('assets/js/recorder.js') }}></script>
 
 <!-- Azzara JS -->
-<script src="{{asset('assets/js/ready.min.js')}}"></script>
+<script src="{{asset('assets/js/ready.js')}}"></script>
 
