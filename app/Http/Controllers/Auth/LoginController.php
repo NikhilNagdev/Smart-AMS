@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use App\user_role;
 
 class LoginController extends Controller
 {
@@ -26,6 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
+
     protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
@@ -36,5 +39,20 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    protected function authenticated() {
+        if (Auth::check()) {
+            $is_verified = Auth::user()->is_verified;
+            $user_id = Auth::user()->id;
+            $user_role = new user_role();
+            $user = $user_role->where('user_id',$user_id)->get();
+            if($user[0]->role_id == 2 && $is_verified == 1){
+                return redirect('/officer/index');
+            }
+            else if($user[0]->role_id == 1 && $is_verified == 1){
+                return redirect('/admin/index');
+            }
+        }
     }
 }

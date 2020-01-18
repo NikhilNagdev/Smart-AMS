@@ -36,11 +36,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
     public function role(){
-        return $this->hasOne(Roles::class);
+        return $this->hasOne(user_role::class);
     }
-    public function center(){
-        return $this->hasOne(Centers::class);
-    }
+
+
 }

@@ -21,8 +21,10 @@ Route::get('/admin', function () {
 
 Route::get('/add-attendance', function () {
     return view('officer.add-attendance');
+})->name('addattendance');
+Route::get('/officer/index', function () {
+    return view('officer.index');
 });
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
