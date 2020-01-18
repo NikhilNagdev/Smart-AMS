@@ -346,8 +346,8 @@
                     if(this.readyState === 4) {
                         console.log("Server returned: ", xhr.response);
                         var response = jQuery.parseJSON(xhr.response);
-                        if(response.output)
-                            if(response.output[0] >= 70.00000000000000){
+                        if(response.output){
+                            if(response.output[0] >= 60.00000000000000){
                                 $('.custom-circle-loader').toggleClass('load-complete');
                                 $('.custom-checkmark').toggle();
                                 $("#audio-div").append("<div class=\"col-auto\"><p class=\"\">Audio Verfied Sucessfully</p></div>");
@@ -356,9 +356,11 @@
                                 $('#recordingsList li').remove();
                                 $('#audio-verification-status').val("true");
                             }
+                        }
                         else{
                             $('#audio-div').hide();
                             $('#recordingsList li').remove();
+                            alert("Audio not recognized")
                         }
 
                     }
@@ -368,7 +370,7 @@
                 fd.append("name", "175333");
                 fd.append("demo", "A woman finds a pot of treasure on the road while she is returning from work Delighted with her luck, she decides to keep it As she is taking it home it keeps changing However her enthusiasm refuses to fade away")		;
 
-                xhr.open("POST", "http://97312277.ngrok.io/uploader", true);
+                xhr.open("POST", "http://9bced81d.ngrok.io/uploader", true);
                 xhr.send(fd);
 
             li.appendChild(document.createTextNode (" "))//add a space in between
@@ -403,10 +405,10 @@
                     'longt':longitude,
                 },
                 success:function(data) {
-                    alert(data.msg);
                     if(data.msg === "Sucessfull" ){
                         $('#lat').val(latitude);
                         $('#long').val(longitude);
+                        $('#locationstatus').text("Location Verified Sucessfully");
                     }else{
                         alert("Your location is invalid");
                     }
